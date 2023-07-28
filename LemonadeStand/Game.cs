@@ -131,6 +131,8 @@ namespace LemonadeStand
         {
             for (int j = 0; j < players.Count; j++)
             {
+                Console.WriteLine($"\tPlayer {players[j].name} is selling...");
+
                 for (int i = 0; i < days[currentDay - 1].customers.Count - 1; i++)
                 {
                     bool result = days[currentDay - 1].customers[i].Purchase(players[j], players[j].recipe, days[currentDay - 1].weather.condition);
@@ -156,13 +158,16 @@ namespace LemonadeStand
 
         public void AnounceStartOftheDay()
         {
-            Console.WriteLine("______________________________________________________");
+            Console.WriteLine("_________________________________________________");
             Console.WriteLine($"\nDay {currentDay} begins!");
+            Console.WriteLine("_________________________________________________");
         }
 
-        public void AcounceEndOftheDay()
+        public void AnounceEndOftheDay()
         {
+            Console.WriteLine("_________________________________________________");
             Console.WriteLine($"\nDay {currentDay} is over! ");
+            Console.WriteLine("_________________________________________________");
             currentDay++;
         }
 
@@ -183,6 +188,7 @@ namespace LemonadeStand
 
                 for (int i = 0; i < players.Count; i++)
                 {
+                    Console.WriteLine($"\nPlayer #{i+1}");
                     players[i].OpenTheStand();
                     store.DisplayStorePrices();
                     store.SellItems(players[i]);
@@ -190,7 +196,7 @@ namespace LemonadeStand
                     players[i].DrinkPreperation();
                 }
                 CustomerPurchase();
-                AcounceEndOftheDay();
+                AnounceEndOftheDay();
                 int x = 0;
 
             }

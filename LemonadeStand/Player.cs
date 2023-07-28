@@ -35,16 +35,22 @@ namespace LemonadeStand
         // member methods (CAN DO)
         public void OpenTheStand()
         {
+            DisplayNameBalance();
             recipe.DisplayRecipe();
             DisplayInvetory();
         }
+        public void DisplayNameBalance()
+        {
+            Console.WriteLine($"===================================================");
+            Console.WriteLine($"==========  Name: {name} | Balance: ${Math.Round(wallet.Money, 2)}");
+            Console.WriteLine($"===================================================");
+        }
         public void DisplayInvetory()
         {   
-            Console.WriteLine($"\n{name} has ${Math.Round(wallet.Money,2)}");
-            Console.WriteLine($"{name} has {inventory.lemons.Count} lemons");
-            Console.WriteLine($"{name} has {inventory.sugarCubes.Count} sugar cubes");
-            Console.WriteLine($"{name} has {inventory.iceCubes.Count} ice cubes");
-            Console.WriteLine($"{name} has {inventory.cups.Count} cups\n");
+            Console.WriteLine($"\nIventory: {inventory.lemons.Count} lemons");
+            Console.WriteLine($"Iventory: {inventory.sugarCubes.Count} sugar cubes");
+            Console.WriteLine($"Iventory: {inventory.iceCubes.Count} ice cubes");
+            Console.WriteLine($"Iventory: {inventory.cups.Count} cups\n");
         }
 
 
