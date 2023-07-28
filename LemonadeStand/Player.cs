@@ -40,11 +40,11 @@ namespace LemonadeStand
         }
         public void DisplayInvetory()
         {   
-            Console.WriteLine($"\nYou have ${Math.Round(wallet.Money,2)}");
-            Console.WriteLine($"You have {inventory.lemons.Count} lemons");
-            Console.WriteLine($"You have {inventory.sugarCubes.Count} sugar cubes");
-            Console.WriteLine($"You have {inventory.iceCubes.Count} ice cubes");
-            Console.WriteLine($"You have {inventory.cups.Count} cups\n");
+            Console.WriteLine($"\n{name} has ${Math.Round(wallet.Money,2)}");
+            Console.WriteLine($"{name} has {inventory.lemons.Count} lemons");
+            Console.WriteLine($"{name} has {inventory.sugarCubes.Count} sugar cubes");
+            Console.WriteLine($"{name} has {inventory.iceCubes.Count} ice cubes");
+            Console.WriteLine($"{name} has {inventory.cups.Count} cups\n");
         }
 
 
@@ -91,13 +91,13 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    Console.WriteLine("Run out of cups....");
+                    Console.WriteLine($"{name} run out of cups....");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine("Sold out!");
+                Console.WriteLine($"{name} Sold out!");
                 return false;
             }
         }
@@ -106,7 +106,7 @@ namespace LemonadeStand
         {
             if (selling)
             {
-                Console.WriteLine($"You sold a cup of {recipe.name} for ${recipe.price}");
+                Console.WriteLine($"{name} sold a cup of {recipe.name} for ${recipe.price}");
                 inventory.cups.RemoveAt(0);
             }
         }
