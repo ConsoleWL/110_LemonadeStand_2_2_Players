@@ -14,6 +14,7 @@ namespace LemonadeStand
         List<Player> players;
         List<Day> days;
         Store store;
+        Player playerWinner;
 
         public Game()
         {
@@ -30,7 +31,7 @@ namespace LemonadeStand
                 new Day(),
                 new Day()
             };
-
+            playerWinner = new Player();
         }
 
         public int NumberOfPlayers()
@@ -88,6 +89,7 @@ namespace LemonadeStand
                 Console.WriteLine($"Player {i + 1}: {players[i].name}");
             }
         }
+
         public void Welcome()
         {
             Console.WriteLine("\nWelcome to Lemonade Stand!");
@@ -95,6 +97,12 @@ namespace LemonadeStand
             Console.WriteLine("The weather, along with your pricing, can affect your success.");
             Console.WriteLine("Can you make the big bucks");
             Console.WriteLine("Player with the biggest stack wins");
+        }
+
+        public void AnounceStartOftheDay()
+        {
+            Console.WriteLine("_________________________________________________");
+            Console.WriteLine($"\nDay {currentDay} begins!");
         }
 
         public void WeatherChanger()
@@ -148,7 +156,13 @@ namespace LemonadeStand
                 }
                 Console.WriteLine();
             }
-            
+        }
+
+        public void CloseTheDay()
+        {
+            DisplayActualWether();
+            DisplayTheResultsOfTheDay();
+            AnounceEndOftheDay();
         }
 
         public void DisplayActualWether()
@@ -156,25 +170,54 @@ namespace LemonadeStand
             Console.WriteLine($"\nActual weather was {days[currentDay - 1].weather.condition}, Temperature: {days[currentDay - 1].weather.temperature} C");
         }
 
-        public void AnounceStartOftheDay()
+        public void DisplayTheResultsOfTheDay()
         {
-            Console.WriteLine("_________________________________________________");
-            Console.WriteLine($"\nDay {currentDay} begins!");
-            Console.WriteLine("_________________________________________________");
+            for (int i = 0; i < players.Count; i++)
+            {
+                players[i].CloseTheStand();
+            }
         }
 
         public void AnounceEndOftheDay()
         {
-            Console.WriteLine("_________________________________________________");
             Console.WriteLine($"\nDay {currentDay} is over! ");
             Console.WriteLine("_________________________________________________");
             currentDay++;
         }
 
-        //public void GameResuts()
-        //{
-        //    Console.WriteLine($"\nThe week is over. Your total profit is {player.wallet.Money}");
-        //}
+        public void GameResuts()
+        {
+            DisplayGameResultsOfAllPlayers();
+            DetermineTheWinner();
+            DisplayTheWinner();
+        }
+
+        public void DisplayGameResultsOfAllPlayers()
+        {
+            Console.WriteLine();
+
+            for (int i = 0; i < players.Count; i++)
+            {
+                Console.WriteLine($"{players[i].name} made: ${players[i].wallet.Money}");
+            }
+        }
+
+        public void DetermineTheWinner()
+        {
+            for (int i = 1; i < players.Count; i++)
+            {
+                playerWinner = players[0];
+                if (playerWinner.wallet.Money < players[i].wallet.Money)
+                {
+                    playerWinner = players[i];
+                }
+            }
+        }
+
+        public void DisplayTheWinner()
+        {
+            Console.WriteLine($"\nThe winner is {playerWinner.name}!!!");
+        }
 
         public void GameSimulation()
         {
@@ -188,48 +231,20 @@ namespace LemonadeStand
 
                 for (int i = 0; i < players.Count; i++)
                 {
-                    Console.WriteLine($"\nPlayer #{i+1}");
+                    Console.WriteLine($"\nPlayer #{i + 1}");
                     players[i].OpenTheStand();
                     store.DisplayStorePrices();
                     store.SellItems(players[i]);
 
                     players[i].DrinkPreperation();
                 }
+
                 CustomerPurchase();
-                AnounceEndOftheDay();
-                int x = 0;
 
+                CloseTheDay();
             }
-
         }
 
-        //public void GameSimulation()
-        //{
-        //    while (currentDay < 8)
-        //    {
-        //        AnounceStartOftheDay();
-
-        //        days[currentDay - 1].weather.DisplayTemperature();
-
-        //        player.OpenTheStand();
-
-        //        store.DisplayStorePrices();
-        //        store.SellItems(player);
-
-
-        //        player.DrinkPreperation();
-
-        //        WeatherChanger();
-
-        //        CustomerPurchase();
-
-        //        DisplayActualWether();
-
-        //        player.CloseTheStand();
-
-        //        AcounceEndOftheDay();
-        //    }
-        //}
 
         public void RunGame()
         {
@@ -238,9 +253,7 @@ namespace LemonadeStand
             DisplayPlayers();
             Welcome();
             GameSimulation();
-            
-            //GameSimulation();
-            // GameResuts();
+            GameResuts();
         }
 
     }
