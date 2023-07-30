@@ -20,27 +20,33 @@ namespace LemonadeStand
 
         public void GenerateCustomers()
         {
+            int result = CheckingTheWeather();
+            CreatingCustomers(result);
+        }
+
+        public int CheckingTheWeather()
+        {
             switch (weather.condition)
             {
+
                 case "perfect":
-                    for (int i = 0; i < 100; i++)
-                    {
-                        customers.Add(new Customer());
-                    }
-                    break;
+                    return 100;
                 case "good":
-                    for (int i = 0; i < 60; i++)
-                    {
-                        customers.Add(new Customer());
-                    }
-                    break;
+                    return 60;
                 case "bad":
-                    for (int i = 0; i < 30; i++)
-                    {
-                        customers.Add(new Customer());
-                    }
-                    break;
+                    return 30;
+                default:
+                    return 0;
             }
         }
+
+        public void CreatingCustomers(int number)
+        {
+            for (int i = 0; i <= number ; i++)
+            {
+                customers.Add(new Customer());
+            }
+        }
+
     }
 }
