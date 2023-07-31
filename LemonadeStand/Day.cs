@@ -28,7 +28,6 @@ namespace LemonadeStand
         {
             switch (weather.condition)
             {
-
                 case "perfect":
                     return 100;
                 case "good":

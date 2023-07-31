@@ -46,7 +46,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    if (number > 4)
+                    if (number > 7)
                     {
                         return true;
                     }
@@ -83,7 +83,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    if (number > 5)
+                    if (number > 8)
                     {
                         return true;
                     }
@@ -119,7 +119,7 @@ namespace LemonadeStand
                 }
                 else
                 {
-                    if (number > 6)
+                    if (number > 9)
                     {
                         return true;
                     }

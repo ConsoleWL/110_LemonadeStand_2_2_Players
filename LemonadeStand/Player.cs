@@ -19,8 +19,6 @@ namespace LemonadeStand
         internal double balanceBeforeday;
         internal double balanceaAtertheday;
         
-        
-        
         // constructor (SPAWNER)
         public Player()
         {
